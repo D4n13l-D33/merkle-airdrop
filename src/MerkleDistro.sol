@@ -21,7 +21,7 @@ contract MerkleDistro is ERC1155 {
         bytes32[] calldata _proof
     ) public returns (bool success_) {
         bytes memory data = abi.encode("");
-        require(!hasClaimed[account]);
+        require(!hasClaimed[account], "already claimed");
         bytes32 leaf = keccak256(abi.encodePacked(account, id, amount));
         bool verify = MerkleProof.verify(_proof, root, leaf);
         require(verify, "Not recognized!");

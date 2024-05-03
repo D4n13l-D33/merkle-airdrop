@@ -48,11 +48,12 @@ contract MerkleDistroTest is Test {
 
         user.id = vm.parseJsonUint(
             dataJson,
-            string.concat(".", vm.toString(user1), ".id")
+            string.concat(".", vm.toString(user1), ".tokenId")
         );
         
         result = abi.decode(encodedResult, (Result));
         console2.logBytes32(result.leaf);
+       
     }
 
     function testClaimed() public {
@@ -69,7 +70,7 @@ contract MerkleDistroTest is Test {
     function testIncorrectProof() public {
         bytes32[] memory fakeProofleaveitleaveit;
 
-        vm.expectRevert("not whitelisted");
+        vm.expectRevert("Not recognized!");
         merkle.claim(user.user, user.id, user.amount, fakeProofleaveitleaveit);
     }
 }
